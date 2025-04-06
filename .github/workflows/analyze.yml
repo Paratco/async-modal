@@ -23,17 +23,14 @@ jobs:
           node-version: 22
           check-latest: 'true'
 
-      - name: Enable Yarn
-        run: corepack enable
-
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Prettier
-        run: yarn format:check
+        run: npm run format:check
 
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
       - name: Check build
-        run: yarn build:check
+        run: npm run build:check
