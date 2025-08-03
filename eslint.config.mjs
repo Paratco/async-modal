@@ -15,5 +15,5 @@ export default createConfig({
       }
     }
   ],
-  ignores: ["dist", "vite.config.ts", "eslint.config.mjs", "src/vite-env.d.ts"]
+  ignores: ["dist", "vite.config.ts", "eslint.config.mjs", "src/vite-env.d.ts", "lib/vite-env.d.ts"]
 });
