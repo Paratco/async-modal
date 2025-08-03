@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import type { ModalContextType } from "../context/ModalContext.tsx";
-import { ModalContext } from "../context/ModalContext.tsx";
+import type { ModalContextType } from "../context/ModalContext";
+import { ModalContext } from "../context/ModalContext";
 
 export function useAsyncModal(): ModalContextType {
   const context = useContext<ModalContextType | null>(ModalContext);

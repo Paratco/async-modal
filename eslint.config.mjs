@@ -1,26 +1,19 @@
-import globals from "globals";
-import tsEslint from "typescript-eslint";
-import paratcoEslintConfig from "@paratco/eslint-config";
+import { createConfig } from "@paratco/eslint-config";
 
-export default tsEslint.config(
-  ...paratcoEslintConfig.react,
-  ...paratcoEslintConfig.prettierFormatter,
-
-  { languageOptions: { globals: globals.browser } },
-
-  {
-    languageOptions: {
-      globals: {
-        ...globals.browser
-      },
-      parserOptions: {
-        project: "./tsconfig.app.json",
-        tsconfigRootDir: import.meta.dirname
+export default createConfig({
+  platform: "react",
+  style: "prettier",
+  useImport: true,
+  typescript: {
+    tsconfigRootDir: "./",
+    project: "./tsconfig.app.json"
+  },
+  overrides: [
+    {
+      rules: {
+        "import-x/no-extraneous-dependencies": ["off"]
       }
     }
-  },
-
-  {
-    ignores: ["dist", "eslint.config.mjs", "vite.config.ts", "vite-env.d.ts"]
-  }
-);
+  ],
+  ignores: ["dist", "vite.config.ts", "eslint.config.mjs", "src/vite-env.d.ts"]
+});

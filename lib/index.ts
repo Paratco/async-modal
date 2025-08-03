@@ -1,4 +1,4 @@
-export { AsyncModalProvider } from "./context/ModalContext.tsx";
-export { useAsyncModal } from "./hooks/useAsyncModal.ts";
+export { AsyncModalProvider } from "./context/ModalContext";
+export { useAsyncModal } from "./hooks/useAsyncModal";
 
-export type { AsyncModalProps, AsyncModalPropsBase } from "./context/ModalContext.tsx";
+export type { AsyncModalProps, AsyncModalPropsBase } from "./context/ModalContext";
