@@ -1,14 +1,8 @@
 import type { ComponentType } from "react";
-import type { ModalAttentionVariant } from "./RefModal";
 
 export interface PropsOpenModal<R, P extends ModalPropsBase | undefined = undefined> {
-  title?: string;
-  subTitle?: string;
-  variant?: ModalAttentionVariant;
-  acceptActionTitle?: string;
   dismissible: boolean;
-  rejectActionTitle?: string;
-  modal?: ComponentType<DefaultModalAnimationProps<R, P>>;
+  modal: ComponentType<DefaultModalAnimationProps<R, P>>;
   data?: P;
 }
 
