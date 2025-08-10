@@ -2,7 +2,7 @@ import type { ComponentType } from "react";
 
 export interface PropsOpenModal<R, P extends ModalPropsBase | undefined = undefined> {
   dismissible: boolean;
-  modal: ComponentType<DefaultModalAnimationProps<R, P>>;
+  modal: ComponentType<DefaultRefModalProps<R, P>>;
   data?: P;
 }
 
@@ -13,7 +13,7 @@ export interface DataResolve {
 
 export type ModalPropsBase = Record<string, unknown>;
 
-export interface DefaultModalAnimationProps<R, P extends ModalPropsBase | undefined = undefined> {
+export interface DefaultRefModalProps<R, P extends ModalPropsBase | undefined = undefined> {
   dismissible: boolean;
   readonly onClose: (result?: R) => void;
   data?: P;
