@@ -15,7 +15,7 @@ interface PromiseRef {
   reject: (reason?: unknown) => void;
 }
 
-const AnimationModal = <R extends DataResolve, P extends ModalPropsBase | undefined = undefined>():
+const RefModal = <R extends DataResolve, P extends ModalPropsBase | undefined = undefined>():
 ForwardRefExoticComponent<RefAttributes<ModalHandle<R, P>>> => {
   const component = forwardRef<ModalHandle<R, P>>((_, ref) => {
 
@@ -146,9 +146,9 @@ ForwardRefExoticComponent<RefAttributes<ModalHandle<R, P>>> => {
     );
   });
 
-  component.displayName = "AnimationModal";
+  component.displayName = "RefModal";
 
   return component;
 };
 
-export default AnimationModal;
+export default RefModal;
