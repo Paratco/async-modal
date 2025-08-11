@@ -66,13 +66,17 @@ export function AsyncModalProvider<R, P extends AsyncModalPropsBase | undefined 
     <ModalContext.Provider value={memValue as ModalContextType}>
       {children}
 
-      {renderModal !== null ? (
-        <renderModal.modal
-          onClose={handleClose}
-          dismissible={renderModal.dismissible ?? true}
-          data={renderModal.data}
-        />
-      ) : null}
+      {
+        renderModal !== null
+          ? (
+            <renderModal.modal
+              dismissible={renderModal.dismissible ?? true}
+              data={renderModal.data}
+              onClose={handleClose}
+            />
+          )
+          : null
+      }
     </ModalContext.Provider>
   );
 }
