@@ -34,6 +34,9 @@ interface AsyncModalProviderProps {
 // eslint-disable-next-line react-refresh/only-export-components
 export const ModalContext = createContext<ModalContextType | null>(null);
 
+/**
+ * @deprecated Use new ref or container modal
+ */
 export function AsyncModalProvider<R, P extends AsyncModalPropsBase | undefined = undefined>({
   children
 }: AsyncModalProviderProps): ReactElement {
