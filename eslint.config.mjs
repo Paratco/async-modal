@@ -2,7 +2,7 @@ import { createConfig } from "@paratco/eslint-config";
 
 export default createConfig({
   platform: "react",
-  style: "prettier",
+  style: "stylistic",
   useImport: true,
   typescript: {
     tsconfigRootDir: "./",
