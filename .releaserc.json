@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json.schemastore.org/semantic-release.json",
+  "tagFormat": "${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          { "type": "update", "release": "patch" }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat", "section": "🚀 Features", "hidden": false },
+            { "type": "feature", "section": "🚀 Features", "hidden": false },
+            { "type": "fix", "section": "🐛 Bug Fixes", "hidden": false },
+            { "type": "perf", "section": "⚡ Performance", "hidden": false },
+            { "type": "revert", "section": "⏪ Reverts", "hidden": false },
+            { "type": "docs", "section": "📝 Documentation", "hidden": false },
+            { "type": "update", "section": "⬆️ Dependency Updates", "hidden": false },
+            { "type": "style", "section": "🎨 Code Style", "hidden": true },
+            { "type": "chore", "section": "🔧 Chores", "hidden": true },
+            { "type": "refactor", "section": "♻️ Refactoring", "hidden": true },
+            { "type": "test", "section": "🧪 Tests", "hidden": true },
+            { "type": "build", "section": "📦 Build System", "hidden": true },
+            { "type": "ci", "section": "🔁 CI/CD", "hidden": true }
+          ]
+        }
+      }
+    ],
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md",
+          "package.json"
+        ]
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "releaseNameTemplate": "Release <%= nextRelease.version %>"
+      }
+    ]
+  ]
+}

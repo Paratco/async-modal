@@ -4,6 +4,10 @@ updates:
   - package-ecosystem: "npm"
     open-pull-requests-limit: 25
     directory: "/"
+    commit-message:
+      prefix: "update"
+      prefix-development: "chore"
+      include: "scope"
     schedule:
       interval: "daily"
       time: "04:00"
