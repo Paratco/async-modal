@@ -20,6 +20,11 @@ export default function ContainerModalLayout<R, P extends ModalPropsBase | undef
       modalRef.current.resolve(result);
       setIsOpen(false);
     }
+
+    globalThis.history.back();
+
+    globalThis.history.pushState(null, "", globalThis.location.pathname);
+    console.log(globalThis.history);
   };
 
   useEffect(() => {
@@ -28,10 +33,31 @@ export default function ContainerModalLayout<R, P extends ModalPropsBase | undef
         setModalProps(props);
         setIsOpen(true);
 
+        globalThis.history.pushState({ modal: true }, "");
+        console.log(globalThis.history);
+
         modalRef.current = { resolve } as PromiseRef;
       });
     });
   }, []);
+
+  useEffect(() => {
+    const handleBack = (): void => {
+      setIsOpen(false);
+
+      globalThis.history.pushState(null, "", globalThis.location.pathname);
+
+      globalThis.history.back();
+    };
+
+    if (isOpen) {
+      globalThis.addEventListener("popstate", handleBack);
+    }
+
+    return () => {
+      globalThis.removeEventListener("popstate", handleBack);
+    };
+  }, [isOpen]);
 
   return (
     <ContainerModalWrapper isOpen={isOpen} dismissible={modalProps?.dismissible ?? false} onClose={onClose}>
