@@ -60,8 +60,6 @@ ForwardRefExoticComponent<RefAttributes<ModalHandle<R, P>>> => {
       globalThis.history.back();
 
       globalThis.history.pushState(null, "", globalThis.location.pathname);
-
-      console.log(globalThis.history);
     };
 
     useImperativeHandle(ref, () => ({
@@ -73,11 +71,9 @@ ForwardRefExoticComponent<RefAttributes<ModalHandle<R, P>>> => {
       const handleBack = (): void => {
         setIsOpen(false);
 
-        globalThis.history.back();
-
         globalThis.history.pushState(null, "", globalThis.location.pathname);
 
-        console.log(globalThis.history);
+        globalThis.history.back();
       };
 
       if (isOpen) {
