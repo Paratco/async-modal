@@ -4,4 +4,4 @@ export * from "./containerModal";
 
 export * from "./imperativeModal";
 
-// export * from "./providerModal";
+export * from "./providerModal";
