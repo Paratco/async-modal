@@ -6,9 +6,9 @@ export interface PropsOpenModal<R, P extends ModalPropsBase | undefined = undefi
   data?: P;
 }
 
-export interface DataResolve {
+export interface DataResolve<P = undefined> {
   result: boolean;
-  data?: unknown;
+  data?: P;
 }
 
 export type ModalPropsBase = Record<string, unknown>;
@@ -21,5 +21,5 @@ export interface DefaultRefModalProps<R, P extends ModalPropsBase | undefined = 
 
 export interface ModalHandle<R, P extends ModalPropsBase | undefined = undefined> {
   open: (props: PropsOpenModal<R, P>) => Promise<R>;
-  close: (result: DataResolve) => void;
+  close: (result: R) => void;
 }

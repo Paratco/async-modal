@@ -15,10 +15,9 @@ interface PromiseRef {
   reject: (reason?: unknown) => void;
 }
 
-const RefModal = <R extends DataResolve, P extends ModalPropsBase | undefined = undefined>():
+const RefModal = <R extends DataResolve<P>, P extends ModalPropsBase | undefined = undefined>():
 ForwardRefExoticComponent<RefAttributes<ModalHandle<R, P>>> => {
   const component = forwardRef<ModalHandle<R, P>>((_, ref) => {
-
     const [isOpen, setIsOpen] = useState(false);
     const [modalProps, setModalProps] = useState<PropsOpenModal<R, P> | null>(null);
 
@@ -38,7 +37,7 @@ ForwardRefExoticComponent<RefAttributes<ModalHandle<R, P>>> => {
       []
     );
 
-    const close = useCallback((result: DataResolve): void => {
+    const close = useCallback((result: DataResolve<P>): void => {
       if (promiseRef.current !== null) {
         promiseRef.current.resolve({
           result: result.result,
@@ -46,12 +45,23 @@ ForwardRefExoticComponent<RefAttributes<ModalHandle<R, P>>> => {
         });
       }
 
+      globalThis.history.back();
+
+      globalThis.history.pushState(null, "", globalThis.location.pathname);
+      console.log(globalThis.history);
+
       setIsOpen(false);
     }, []);
 
     const onClose = (result?: R): void => {
       promiseRef.current?.resolve(result);
       setIsOpen(false);
+
+      globalThis.history.back();
+
+      globalThis.history.pushState(null, "", globalThis.location.pathname);
+
+      console.log(globalThis.history);
     };
 
     useImperativeHandle(ref, () => ({
@@ -61,20 +71,22 @@ ForwardRefExoticComponent<RefAttributes<ModalHandle<R, P>>> => {
 
     useEffect(() => {
       const handleBack = (): void => {
-        onClose({
-          result: false
-        } as R);
+        setIsOpen(false);
+
+        globalThis.history.back();
+
+        globalThis.history.pushState(null, "", globalThis.location.pathname);
+
+        console.log(globalThis.history);
       };
 
       if (isOpen) {
         globalThis.addEventListener("popstate", handleBack);
-
-        globalThis.history.pushState(null, "", globalThis.location.pathname);
-
-        return () => {
-          globalThis.removeEventListener("popstate", handleBack);
-        };
       }
+
+      return () => {
+        globalThis.removeEventListener("popstate", handleBack);
+      };
     }, [isOpen]);
 
     return (
