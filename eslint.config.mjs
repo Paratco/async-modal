@@ -11,7 +11,8 @@ export default createConfig({
   overrides: [
     {
       rules: {
-        "import-x/no-extraneous-dependencies": ["off"]
+        "import-x/no-extraneous-dependencies": ["off"],
+        "@typescript-eslint/no-explicit-any": ["off"],
       }
     }
   ],
