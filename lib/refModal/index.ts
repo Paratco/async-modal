@@ -2,6 +2,6 @@ export { default as RefModal } from "./RefModal";
 
 export type {
   DefaultRefModalProps,
-  PropsOpenModal,
-  ModalHandle
+  ModalHandle,
+  ModalPropsBase
 } from "./types";

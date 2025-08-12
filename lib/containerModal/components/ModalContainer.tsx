@@ -68,7 +68,7 @@ export function ModalContainer(props: Partial<ContainerModalOptions>): ReactElem
               dismissible={modalOptions.dismissible}
               data={modalOptions.data}
               onClose={(result?: unknown) => {
-                handleRemoveModal(result !== undefined ? result : null);
+                handleRemoveModal(result);
               }}
             />
           )

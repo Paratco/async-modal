@@ -5,7 +5,7 @@ import { modalStore } from "./store";
 async function add<Response, Data>(
   modal: AsyncModalComponent<Response, Data>,
   options?: Partial<ModalItemOptions<Data>>
-): Promise<Response | null> {
+): Promise<Response | undefined> {
   return new Promise((resolve, reject) => {
     modalStore.addModal({
       modal: modal,

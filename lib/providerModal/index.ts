@@ -1,5 +1,3 @@
-export { AsyncModalProvider } from "./context/ModalContext";
+export { ModalProvider } from "./components/ModalProvider";
 
-export { useAsyncModal } from "./hooks/useAsyncModal";
-
-export type { AsyncModalProps, AsyncModalPropsBase } from "./context/ModalContext";
+export { useProviderModal } from "./hooks/useProviderModal";
