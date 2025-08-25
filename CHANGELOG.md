@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/Paratco/async-modal/compare/2.0.0...2.1.0) (2025-08-25)
+
+### 🚀 Features
+
+* auto detect imperative api types based on modal type ([cb503b1](https://github.com/Paratco/async-modal/commit/cb503b11375a5f152a7d547222ccf3e08113b8ab))
+
 ## [2.0.0](https://github.com/Paratco/async-modal/compare/1.0.12...2.0.0) (2025-08-12)
 
 ### ⚠ BREAKING CHANGES
