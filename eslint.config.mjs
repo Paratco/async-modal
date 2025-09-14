@@ -1,4 +1,4 @@
-import {createConfig} from "@paratco/eslint-config";
+import { createConfig } from "@paratco/eslint-config";
 
 export default createConfig({
   platform: "react",
