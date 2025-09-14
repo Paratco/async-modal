@@ -1,11 +1,11 @@
-import { createConfig } from "@paratco/eslint-config";
+import {createConfig} from "@paratco/eslint-config";
 
 export default createConfig({
   platform: "react",
   style: "stylistic",
   useImport: true,
   typescript: {
-    tsconfigRootDir: "./",
+    tsconfigRootDir: import.meta.dirname,
     project: "./tsconfig.app.json"
   },
   overrides: [
