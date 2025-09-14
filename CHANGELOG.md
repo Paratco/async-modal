@@ -1,3 +1,13 @@
+## [2.1.1](https://github.com/Paratco/async-modal/compare/2.1.0...2.1.1) (2025-09-14)
+
+### 🐛 Bug Fixes
+
+* eslint tsconfigRootDir ([b325a0e](https://github.com/Paratco/async-modal/commit/b325a0e62b324626bb473e02975d00cc9517be93))
+
+### ⬆️ Dependency Updates
+
+* bump @types/node to 24.4.0 ([f8a8bf0](https://github.com/Paratco/async-modal/commit/f8a8bf0356e59b1287166981cee2fff2aa4c1da0))
+
 ## [2.1.0](https://github.com/Paratco/async-modal/compare/2.0.0...2.1.0) (2025-08-25)
 
 ### 🚀 Features
