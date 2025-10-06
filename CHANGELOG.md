@@ -1,3 +1,9 @@
+## [2.1.2](https://github.com/Paratco/async-modal/compare/2.1.1...2.1.2) (2025-10-06)
+
+### 🐛 Bug Fixes
+
+* update packages ([c97e7e0](https://github.com/Paratco/async-modal/commit/c97e7e09bf79e0d9f70995153b2aa5c4e1aa5b3d))
+
 ## [2.1.1](https://github.com/Paratco/async-modal/compare/2.1.0...2.1.1) (2025-09-14)
 
 ### 🐛 Bug Fixes
