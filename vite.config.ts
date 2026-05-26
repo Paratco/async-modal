@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     dts({
       include: ["lib"],
-      rollupTypes: true,
+      bundleTypes: true,
       tsconfigPath: "./tsconfig.app.json"
     })
   ],
