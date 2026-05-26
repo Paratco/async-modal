@@ -220,7 +220,7 @@ pnpm add @paratco/async-modal
       };
 
       const handleConfirm = (): void => {
-        onClose(false);
+        onClose(true);
       };
 
       return (
@@ -291,9 +291,10 @@ pnpm add @paratco/async-modal
     ```
 
   3. using from `useProviderModal` Hook for show My modal:
-    import { useProviderModal } from "@paratco/async-modal";
 
       ```tsx
+      import { useProviderModal } from "@paratco/async-modal";
+
       const { show } = useProviderModal();
       ```
 
@@ -423,12 +424,13 @@ pnpm add @paratco/async-modal
     ```
 
 2. Create `Ref` of Imperative modal for showing:
+- we should use _`MyModal`_ component as type component:
 
     ```tsx
     import { useRef } from "react";
-    import type { ImperativeModalApi } from "@paratco/async-modal";
+    import type { ImperativeModalRef } from "@paratco/async-modal";
 
-    const imperativeRef = useRef<ImperativeModalApi<boolean, null>>(null);
+    const imperativeRef = useRef<ImperativeModalRef<typeof MyModal>>(null);
     ```
 
 3. set Function `showMyModal`:
