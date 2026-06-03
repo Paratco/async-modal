@@ -1,3 +1,13 @@
+## [2.1.3](https://github.com/Paratco/async-modal/compare/2.1.2...2.1.3) (2026-06-03)
+
+### 🐛 Bug Fixes
+
+* fix Read Me file ([55e79d5](https://github.com/Paratco/async-modal/commit/55e79d5efc4cc0ec6716a825e118c9ead2ca1126))
+
+### ⬆️ Dependency Updates
+
+* update dependencies ([fa3fa9d](https://github.com/Paratco/async-modal/commit/fa3fa9dba8ecf91fa3e28448eea007a7bdb7389d))
+
 ## [2.1.2](https://github.com/Paratco/async-modal/compare/2.1.1...2.1.2) (2025-10-06)
 
 ### 🐛 Bug Fixes
