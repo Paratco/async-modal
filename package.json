@@ -57,7 +57,7 @@
     "@types/react-dom": "19.2.3",
     "@types/stylis": "4.2.7",
     "@vitejs/plugin-react": "6.0.2",
-    "conventional-changelog-conventionalcommits": "9.3.1",
+    "conventional-changelog-conventionalcommits": "10.2.0",
     "eslint": "9.37.0",
     "react": "19.2.6",
     "react-dom": "19.2.6",
