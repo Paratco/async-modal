@@ -44,7 +44,7 @@
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@mui/material": "9.0.1",
-    "@mui/stylis-plugin-rtl": "9.0.1",
+    "@mui/stylis-plugin-rtl": "9.3.0",
     "@paratco/eslint-config": "3.4.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.1",
