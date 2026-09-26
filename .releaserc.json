@@ -37,6 +37,12 @@
     "@semantic-release/changelog",
     "@semantic-release/npm",
     [
+      "@semantic-release/exec",
+      {
+        "publishCmd": "npm pkg delete publishConfig && npm publish --registry=https://npm.pkg.github.com --//npm.pkg.github.com/:_authToken=$GITHUB_PACKAGES_TOKEN"
+      }
+    ],
+    [
       "@semantic-release/git",
       {
         "assets": [
