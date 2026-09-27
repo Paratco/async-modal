@@ -1,6 +1,6 @@
 import type { RefObject, ReactElement } from "react";
-import { useMemo, useImperativeHandle, useState, useRef } from "react";
-import type { AsyncModalComponent, PromiseType } from "../types";
+import { useEffect, useImperativeHandle, useState, useRef } from "react";
+import type { AsyncModalComponent } from "../types";
 import type { ImperativeModalApi } from "./types";
 
 interface Props<Response, Data> {
@@ -10,6 +10,8 @@ interface Props<Response, Data> {
   readonly ref?: RefObject<ImperativeModalApi<Response, Data> | null>;
 }
 
+type Resolver<Response> = (result?: Response) => void;
+
 export function ImperativeModal<Response, Data>({
   Modal,
   dismissible = true,
@@ -17,16 +19,27 @@ export function ImperativeModal<Response, Data>({
   ref
 }: Props<Response, Data>): ReactElement {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [additionalData, setAdditionalData] = useState<Data | null>(null);
+  const [showData, setShowData] = useState<Data>();
 
-  const promiseRef = useRef<PromiseType>(null);
+  const resolveRef = useRef<Resolver<Response>>(null);
+
+  const settle = (result?: Response): void => {
+    const resolve = resolveRef.current;
+
+    resolveRef.current = null;
+    resolve?.(result);
+  };
+
+  // Unmount: settle the pending promise so it does not hang
+  useEffect(() => {
+    return () => {
+      resolveRef.current?.();
+      resolveRef.current = null;
+    };
+  }, []);
 
   const handleClose = (result?: Response): void => {
-    if (promiseRef.current !== null) {
-      promiseRef.current.resolve(result);
-    }
-
-    promiseRef.current = null;
+    settle(result);
     setIsVisible(false);
   };
 
@@ -34,30 +47,28 @@ export function ImperativeModal<Response, Data>({
   useImperativeHandle(ref, () => {
     return {
       api: {
-        show: async (ad) => {
-          if (ad !== undefined) {
-            setAdditionalData(ad);
-          }
+        show: async (showWith) => {
+          // A new show() settles the previous one instead of leaving it pending
+          settle();
 
+          // Data passed to show() applies to this showing only
+          setShowData(showWith);
           setIsVisible(true);
 
-          return new Promise((resolve, reject) => {
-            promiseRef.current = { resolve, reject };
+          return new Promise((resolve) => {
+            resolveRef.current = resolve;
           });
         }
       }
     };
   });
 
-  const dataProps: Data | undefined = useMemo(() => {
-    if (additionalData !== null) {
-      return additionalData;
-    }
-
-    return data;
-  }, [additionalData, data]);
-
   return (
-    <Modal isVisible={isVisible} dismissible={dismissible} data={dataProps} onClose={handleClose} />
+    <Modal
+      isVisible={isVisible}
+      dismissible={dismissible}
+      data={showData ?? data}
+      onClose={handleClose}
+    />
   );
 }

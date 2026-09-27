@@ -6,15 +6,14 @@ export default createConfig({
   useImport: true,
   typescript: {
     tsconfigRootDir: import.meta.dirname,
-    project: "./tsconfig.app.json"
+    project: "./tsconfig.json"
   },
   overrides: [
     {
       rules: {
-        "import-x/no-extraneous-dependencies": ["off"],
         "@typescript-eslint/no-explicit-any": ["off"],
       }
     }
   ],
-  ignores: ["dist", "vite.config.ts", "eslint.config.mjs", "src/vite-env.d.ts", "lib/vite-env.d.ts"]
+  ignores: ["dist", "eslint.config.mjs"]
 });
