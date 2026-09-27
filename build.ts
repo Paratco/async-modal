@@ -1,8 +1,6 @@
-import { rmSync } from "node:fs";
+import type { BuildConfig } from "bun";
 
-rmSync("./dist", { recursive: true, force: true });
-
-const result = await Bun.build({
+const config: BuildConfig = {
   entrypoints: ["./lib/index.ts"],
   outdir: "./dist",
   format: "esm",
@@ -10,7 +8,9 @@ const result = await Bun.build({
   packages: "external",
   sourcemap: "linked",
   minify: false
-});
+};
+
+const result = await Bun.build(config);
 
 if (!result.success) {
   throw new AggregateError(result.logs, "Build failed");

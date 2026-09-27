@@ -34,9 +34,10 @@
     "bun": "1.4.2"
   },
   "scripts": {
-    "build": "NODE_ENV=production bun ./build.ts && bun run build:types",
+    "clean": "rm -rf dist",
+    "build": "bun run clean && NODE_ENV=production bun ./build.ts && bun run build:types",
     "build:types": "tsc -p ./tsconfig.build.json",
-    "typecheck": "tsc -p ./tsconfig.json",
+    "build:check": "tsc -p ./tsconfig.json",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "release": "semantic-release",
