@@ -1,13 +1,14 @@
 {
-  "extends": "./tsconfig.app.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
+    "types": [],
     "noEmit": false,
-    "allowImportingTsExtensions": false,
+    "emitDeclarationOnly": true,
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "./lib",
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.build.tsbuildinfo"
-  }
+    "rootDir": "./lib"
+  },
+  "include": [
+    "lib"
+  ]
 }

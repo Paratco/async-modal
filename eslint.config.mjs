@@ -6,12 +6,11 @@ export default createConfig({
   useImport: true,
   typescript: {
     tsconfigRootDir: import.meta.dirname,
-    project: "./tsconfig.app.json"
+    project: "./tsconfig.json"
   },
   overrides: [
     {
       rules: {
-        "import-x/no-extraneous-dependencies": ["off"],
         "@typescript-eslint/no-explicit-any": ["off"],
       }
     }

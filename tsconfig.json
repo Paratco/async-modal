@@ -1,8 +1,41 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    }
+  "compilerOptions": {
+    /* Type Checking */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Modules */
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noUncheckedSideEffectImports": true,
+    "types": ["bun"],
+
+    /* Emit */
+    "noEmit": true,
+
+    /* Interop Constraints */
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Language and Environment */
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+
+    /* Completeness */
+    "skipLibCheck": true
+  },
+  "include": [
+    "lib",
+    "build.ts"
   ]
 }
