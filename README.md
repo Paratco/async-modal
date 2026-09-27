@@ -47,7 +47,7 @@ Built with:
 - Lightweight and reusable
 - No reducers
 - No external state library
-- React 18 compatible
+- React 19+
 - TypeScript support
 - Async/Await modal handling
 

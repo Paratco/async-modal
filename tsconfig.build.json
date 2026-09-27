@@ -1,4 +1,14 @@
 {
-  "extends": "./tsconfig.app.json",
-  "include": ["lib"]
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [],
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./lib"
+  },
+  "include": [
+    "lib"
+  ]
 }

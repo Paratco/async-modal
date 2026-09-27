@@ -1,105 +1,36 @@
-import type { ReactElement } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import type {
-  ModalOptions,
-  ProviderModalContext, ProviderModalItem,
-  ProviderModalOptions
-} from "../types";
-import type { AsyncModalComponent } from "../../types";
-import { DEFAULT_OPTIONS } from "../config";
+import type { ReactElement, ReactNode } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { createModalStore } from "../../core/createModalStore";
+import { ModalRenderer } from "../../core/ModalRenderer";
+import type { ModalDefaults } from "../../core/types";
+import type { ProviderModalContext } from "../types";
 import { ModalContext } from "./ModalContext";
 
-interface Props extends Partial<ProviderModalOptions> {
-  readonly children: ReactElement;
+interface Props extends Partial<ModalDefaults> {
+  readonly children?: ReactNode;
 }
 
-export function ModalProvider<Response, Data>({
-  children,
-  ...props
-}: Props): ReactElement {
-  const [renderModal, setRenderModal] = useState<ProviderModalItem<Response, Data> | null>(null);
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+export function ModalProvider({ children, ...defaults }: Props): ReactElement {
+  // Created once per provider; never replaced
+  // eslint-disable-next-line react/hook-use-state
+  const [store] = useState(createModalStore);
 
-  const timeout = useRef<ReturnType<typeof setTimeout>>(null);
-
-  // Unmount: Clear State
+  // Unmount: settle the open modal so its promise does not hang
   useEffect(() => {
     return () => {
-      if (timeout.current !== null) {
-        clearTimeout(timeout.current);
-      }
+      store.dismissAll();
     };
-  }, []);
+  }, [store]);
 
-  const modalOptions = useMemo(() => {
-    if (renderModal === null) {
-      return null;
-    }
-
-    return {
-      ...DEFAULT_OPTIONS,
-      ...props,
-      ...renderModal.options
-    };
-  }, [props, renderModal]);
-
-  const handleClose = (result?: Response): void => {
-    if (renderModal === null) {
-      return;
-    }
-
-    if (modalOptions !== null && modalOptions.outDelay > 0) {
-      setIsVisible(false);
-
-      timeout.current = setTimeout(() => {
-        renderModal.promise.resolve(result);
-
-        setRenderModal(null);
-        setIsVisible(true);
-      }, modalOptions.outDelay);
-
-      return;
-    }
-
-    renderModal.promise.resolve(result);
-
-    setRenderModal(null);
-    setIsVisible(true);
-  };
-
-  const memValue = useMemo(() => {
-    return {
-      show: async (
-        modal: AsyncModalComponent<Response, Data>,
-        options?: ModalOptions<Data>
-      ): Promise<Response | undefined> => {
-        return new Promise((resolve, reject) => {
-          setRenderModal({
-            modal,
-            options,
-            promise: { resolve, reject }
-          });
-        });
-      }
-    } as ProviderModalContext;
-  }, []);
+  const contextValue = useMemo<ProviderModalContext>(() => {
+    return { show: store.open };
+  }, [store]);
 
   return (
-    <ModalContext.Provider value={memValue}>
+    <ModalContext value={contextValue}>
       {children}
 
-      {
-        renderModal !== null && modalOptions !== null
-          ? (
-            <renderModal.modal
-              isVisible={isVisible}
-              dismissible={modalOptions.dismissible}
-              data={modalOptions.data}
-              onClose={handleClose}
-            />
-          )
-          : null
-      }
-    </ModalContext.Provider>
+      <ModalRenderer store={store} defaults={defaults} />
+    </ModalContext>
   );
 }
